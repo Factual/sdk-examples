@@ -9,7 +9,7 @@ If you would like notifications from Engine in the app’s background state we r
 
 ## Integration
 
-The main difference between our Listener example and BroadcastReceiver example is that you must reference your Receivers in your AndroidManifest.xml.  We do the following in our example:
+The main difference between our Listener example and BroadcastReceiver example is that you must reference your Receivers in your AndroidManifest.xml.  We do the following in [our example](https://github.com/Factual/engine-examples/blob/b66a0357f492f2041d53c5ab97350704c801371e/broadcast-receiver-example/app/src/main/AndroidManifest.xml#L20-L21):
 
 ```xml
 ...
@@ -19,11 +19,11 @@ The main difference between our Listener example and BroadcastReceiver example i
 ...
 ```
 
-The `ConsoleLoggingActionReceiver` extends `FactualActionReceiver` and the `ConsoleLoggingFactualClientReceiver` extends `FactualClientReceiver`.
+The [`ConsoleLoggingActionReceiver`](https://github.com/Factual/engine-examples/blob/b66a0357f492f2041d53c5ab97350704c801371e/broadcast-receiver-example/app/src/main/java/com/factual/broadcastreceiverexample/ConsoleLoggingActionReceiver.java) extends `FactualActionReceiver` and the [`ConsoleLoggingFactualClientReceiver`](https://github.com/Factual/engine-examples/blob/b66a0357f492f2041d53c5ab97350704c801371e/broadcast-receiver-example/app/src/main/java/com/factual/broadcastreceiverexample/ConsoleLoggingFactualClientReceiver.java) extends `FactualClientReceiver`.
 
 Setting or registering a receiver is also a little different, for example:
 
-Setting the `FactualClientReceiver` in `MainActivity.java`:
+Setting the `FactualClientReceiver` in [`MainActivity.java`](https://github.com/Factual/engine-examples/blob/b66a0357f492f2041d53c5ab97350704c801371e/broadcast-receiver-example/app/src/main/java/com/factual/broadcastreceiverexample/MainActivity.java#L42):
 
 ```java
 ...
@@ -31,7 +31,7 @@ FactualEngine.setListener(ConsoleLoggingFactualClientReceiver.class);
 ...
 ```
 
-Registering the `FactualActionReceiver` in `ConsoleLoggingFactualClientReceiver.java`:
+Registering the `FactualActionReceiver` in [`ConsoleLoggingFactualClientReceiver.java`](https://github.com/Factual/engine-examples/blob/b66a0357f492f2041d53c5ab97350704c801371e/broadcast-receiver-example/app/src/main/java/com/factual/broadcastreceiverexample/ConsoleLoggingFactualClientReceiver.java#L42):
 
 ```java
 ...
