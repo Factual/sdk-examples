@@ -8,8 +8,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.factual.FactualCircumstance;
 import com.factual.FactualException;
 import com.factual.engine.FactualEngine;
+import com.factual.engine.api.FactualCircumstanceException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +42,30 @@ public class MainActivity extends AppCompatActivity {
         FactualEngine.initialize(this, "your api-key goes here"); // TODO: Put your API key here
         // ConsoleLoggingFactualClientReceiver extends FactualClientReceiver, the BroadcastReceiver version of FactualClientListener
         FactualEngine.setListener(ConsoleLoggingFactualClientReceiver.class);
+
+        // register a handler for the action "log-event", and map it to ConsoleLoggingActionReceiver (see below)
+        // ConsoleLoggingActionReceiver extends FactualActionReceiver, the BroadcastReceiver version of FactualActionHandler
+        String actionId = "log-event";
+        FactualEngine.registerAction(actionId, ConsoleLoggingActionReceiver.class);
+        // Example of *optionally* creating circumstances client-side rather than through the Garage UI.
+        // The handler associated with the action id "log-event" will be invoked if this circumstance is
+        // met.
+        this.registerClientSideCircumstance(actionId);
+    }
+
+    private void registerClientSideCircumstance(String actionId) {
+        // register a circumstance to fire off any time a user stops at or near any Factual place.
+        // more info on Factual places: http://developer.factual.com/places/
+        // more info on expressions:    http://developer.factual.com/engine/circumstances/
+        String circumstanceId = "myCircumstanceId";
+        String expression = "(or (at any-factual-place) (near any-factual-place))";
+
+        FactualCircumstance circumstance = new FactualCircumstance(circumstanceId, expression, actionId);
+        try {
+            FactualEngine.registerCircumstance(circumstance);
+        } catch(FactualCircumstanceException e){
+            Log.e("engine", e.getMessage());
+        }
     }
 
     private void startEngine() {

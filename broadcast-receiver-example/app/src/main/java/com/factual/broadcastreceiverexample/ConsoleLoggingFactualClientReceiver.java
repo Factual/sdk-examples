@@ -13,21 +13,6 @@ import com.factual.engine.FactualEngine;
 import com.factual.engine.api.FactualCircumstanceException;
 
 public class ConsoleLoggingFactualClientReceiver extends FactualClientReceiver {
-  private void registerClientSideCircumstance(String actionId) {
-    // register a circumstance to fire off any time a user stops at or near any Factual place.
-    // more info on Factual places: http://developer.factual.com/places/
-    // more info on expressions:    http://developer.factual.com/engine/circumstances/
-    String circumstanceId = "myCircumstanceId";
-    String expression = "(or (at any-factual-place) (near any-factual-place))";
-
-    FactualCircumstance circumstance = new FactualCircumstance(circumstanceId, expression, actionId);
-    try {
-      FactualEngine.registerCircumstance(circumstance);
-    } catch(FactualCircumstanceException e){
-      Log.e("engine", e.getMessage());
-    }
-  }
-
   @Override
   public void onContext(Context context) {
     // If you need fields from the context
@@ -36,21 +21,9 @@ public class ConsoleLoggingFactualClientReceiver extends FactualClientReceiver {
   @Override
   public void onStarted() {
     Log.i("engine", "Engine has started.");
-    // register a handler for the action "log-event", and map it to ConsoleLoggingActionReceiver (see below)
-    // ConsoleLoggingActionReceiver extends FactualActionReceiver, the BroadcastReceiver version of FactualActionHandler
-    String actionId = "log-event";
-    FactualEngine.registerAction(actionId, ConsoleLoggingActionReceiver.class);
     // Example of getting a list of candidates for my current location. (results will show up in
     // logging console, so this example won't be interesting outside of the device emulator).
-    try {
-      FactualEngine.getPlaceCandidates(new ConsoleLoggingFactualPlacesListener());
-    } catch (FactualException e) {
-      Log.e("engine", e.getMessage());
-    }
-    // Example of *optionally* creating circumstances client-side rather than through the Garage UI.
-    // The handler associated with the action id "log-event" will be invoked if this circumstance is
-    // met.
-    this.registerClientSideCircumstance(actionId);
+    FactualEngine.getPlaceCandidates(new ConsoleLoggingFactualPlacesListener());
   }
 
   @Override
