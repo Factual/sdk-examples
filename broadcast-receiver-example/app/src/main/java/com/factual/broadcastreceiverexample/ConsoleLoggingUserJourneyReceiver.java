@@ -21,7 +21,7 @@ public class ConsoleLoggingUserJourneyReceiver extends UserJourneyReceiver {
   @Override
   public void onUserJourneyEvent(UserJourneyEvent userJourneyEvent) {
     try {
-      Log.i("engine", "Receieved User Journey event: " + userJourneyEvent.toJson().toString());
+      Log.i("engine", "Received User Journey event: " + userJourneyEvent.toJson().toString());
     } catch (JSONException e) {
       Log.e("engine", "Error with User Journey json");
     }
