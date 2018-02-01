@@ -19,6 +19,7 @@
         <service android:name="com.factual.engine.FactualEngine"/>
         <receiver android:name=".ConsoleLoggingActionReceiver"/>
         <receiver android:name=".ConsoleLoggingFactualClientReceiver"/>
+        <receiver android:name=".ConsoleLoggingUserJourneyReceiver"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

@@ -48,10 +48,9 @@ public class ConsoleLoggingActionReceiver extends FactualActionReceiver {
 
   @Override
   public void onCircumstancesMet(List response) {
-
     // if multiple circumstances are met simultaneously, they will all be in this list together.
     for (CircumstanceResponse circumstanceMet : (List<CircumstanceResponse>) response) {
-      Log.e("Engine Action Handler", "met " + circumstanceMet.getCircumstance().getCircumstanceId());
+      Log.i("Engine Action Handler", "met " + circumstanceMet.getCircumstance().getCircumstanceId());
 
       // contains 'at' places that meet the circumstance criteria
       logPlaces(circumstanceMet.getAtPlaces());
