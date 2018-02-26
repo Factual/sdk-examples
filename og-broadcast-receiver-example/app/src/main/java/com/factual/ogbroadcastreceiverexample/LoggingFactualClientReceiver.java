@@ -39,4 +39,10 @@ public class LoggingFactualClientReceiver extends FactualClientReceiver {
   public void onConfigLoad(FactualConfigMetadata factualConfigMetadata) {
     Log.i("og-sdk", "Config loaded with version: " + factualConfigMetadata.getVersion());
   }
+
+  @Override
+  public void onDiagnosticMessage(String diagnosticMessage) {
+    // Delivers structured diagnostic data that is helpful for Factual when evaluating performance
+    // and diagnosing issues.
+  }
 }

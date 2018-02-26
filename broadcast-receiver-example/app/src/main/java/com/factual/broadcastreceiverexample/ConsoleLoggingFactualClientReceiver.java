@@ -57,4 +57,10 @@ public class ConsoleLoggingFactualClientReceiver extends FactualClientReceiver {
       Log.i("engine", "Garage release is empty");
     }
   }
+
+  @Override
+  public void onDiagnosticMessage(String diagnosticMessage) {
+    // Delivers structured diagnostic data that is helpful for Factual when evaluating performance
+    // and diagnosing issues.
+  }
 }
