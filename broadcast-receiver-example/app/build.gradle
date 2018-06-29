@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.factual.broadcastreceiverexample"
         minSdkVersion 21
@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 repositories {
@@ -30,22 +33,22 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
 
     // Third party libraries used by the Engine SDK:
-    compile 'com.android.volley:volley:1.1.0'
-    compile('com.google.android.gms:play-services-location:11.0.4', {
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation('com.google.android.gms:play-services-location:11.0.4', {
         exclude group: 'com.android.support', module: 'support-v4'
     })
-    compile 'org.apache.thrift:libthrift:0.9.3'
-    compile 'com.google.android.gms:play-services-analytics:11.0.4'
+    implementation 'org.apache.thrift:libthrift:0.9.3'
+    implementation 'com.google.android.gms:play-services-analytics:11.0.4'
 
     // The Engine AAR:
-    compile(name: 'factual-engine-sdk-android', ext: 'aar')
+    implementation(name: 'factual-engine-sdk-android', ext: 'aar')
 }
