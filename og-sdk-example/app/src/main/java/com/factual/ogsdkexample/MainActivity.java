@@ -1,4 +1,4 @@
-package com.factual.ogbroadcastreceiverexample;
+package com.factual.ogsdkexample;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
