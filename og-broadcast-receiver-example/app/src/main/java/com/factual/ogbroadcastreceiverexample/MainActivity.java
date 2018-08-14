@@ -2,79 +2,58 @@ package com.factual.ogbroadcastreceiverexample;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
-import com.factual.FactualException;
-import com.factual.observationgraph.FactualObservationGraph;
+import com.factual.android.FactualException;
+import com.factual.android.ObservationGraph;
 
 public class MainActivity extends AppCompatActivity {
-
-  private int LOCATION_FINE_REQUEST = 0;
+  public static final String LOGTAG = MainActivity.class.getName();
+  public static final int PERMISSIONS_REQUEST_CODE = 100;
+  public static final String API_KEY = "your-api-key";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    try {
-
-      initializeObservationGraphClient();
-
-      /*
-       *   We leave checking/obtaining location permissions to you, so that you can lump in
-       *   any other permissions you may require, as well as choose the method and timing of the
-       *   prompt.
-       *
-       *   Therefore, the following is for illustrative purposes:
-       */
-
-      if (isRequiredPermissionAvailable()) {
-        startObservationGraphClient();
-      } else {
-        requestLocationPermissions();
-      }
-
-    } catch (FactualException e) {
-      Log.e("og-sdk", e.getMessage());
-    }
+    startOG();
   }
 
-  // this is how you initialize the client.
-  public void initializeObservationGraphClient() throws FactualException {
-    FactualObservationGraph.initialize(this, "your api-key goes here"); //TODO: insert your api-key
-    FactualObservationGraph.setListener(LoggingFactualClientReceiver.class);
-  }
-
-  // and this is how you start it.
-  private void startObservationGraphClient() throws FactualException {
-    FactualObservationGraph.start();
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-    if (isRequiredPermissionAvailable()) {
+  public void startOG() {
+    if(isRequiredPermissionAvailable()) {
       try {
-        startObservationGraphClient();
+        ObservationGraph.getInstance(this, API_KEY);
       } catch (FactualException e) {
-        Log.e("og-sdk", e.getMessage());
+        Log.e(LOGTAG, "Factual Exception: " + e);
       }
     } else {
-      Log.e("og-sdk", "Necessary permissions were never provided.");
+      requestLocationPermissions();
     }
   }
 
-  // These are the permissions that the Observation Graph client require:
-  public boolean isRequiredPermissionAvailable(){
+  public boolean isRequiredPermissionAvailable() {
     return ContextCompat.checkSelfPermission(this,
         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
         ContextCompat.checkSelfPermission(this,
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
         ContextCompat.checkSelfPermission(this,
             Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED;
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    if (requestCode == PERMISSIONS_REQUEST_CODE) {
+      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        Log.d(LOGTAG,"permissions granted");
+        startOG();
+      } else {
+        Log.e(LOGTAG,"permission denied");
+      }
+    }
   }
 
   public void requestLocationPermissions() {
@@ -85,6 +64,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.INTERNET
         },
-        LOCATION_FINE_REQUEST);
+        PERMISSIONS_REQUEST_CODE);
   }
 }
