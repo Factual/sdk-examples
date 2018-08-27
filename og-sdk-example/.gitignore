@@ -4,3 +4,5 @@ build
 *.aar
 *.iml
 local.properties
+app/libs/
+.DS_Store

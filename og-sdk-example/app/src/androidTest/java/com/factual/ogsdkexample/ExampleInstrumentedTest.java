@@ -1,4 +1,4 @@
-package com.factual.ogbroadcastreceiverexample;
+package com.factual.ogsdkexample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

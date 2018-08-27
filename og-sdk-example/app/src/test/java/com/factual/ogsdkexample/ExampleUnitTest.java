@@ -1,4 +1,4 @@
-package com.factual.ogbroadcastreceiverexample;
+package com.factual.ogsdkexample;
 
 import org.junit.Test;
 
