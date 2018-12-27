@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
   public void initializeEngine() throws FactualException {
     FactualEngine.initialize(this, "your api-key goes here"); // TODO: Put your API key here
     // ConsoleLoggingFactualClientReceiver extends FactualClientReceiver, the BroadcastReceiver version of FactualClientListener
-    FactualEngine.setListener(ConsoleLoggingFactualClientReceiver.class);
+    FactualEngine.setReceiver(ConsoleLoggingFactualClientReceiver.class);
 
     // ConsoleLoggingUserJourneyReceiver extends UserJourneyReceiver, the BroadcastReceiver version of UserJourneyListener
-    FactualEngine.setUserJourneyListener(ConsoleLoggingUserJourneyReceiver.class);
+    FactualEngine.setUserJourneyReceiver(ConsoleLoggingUserJourneyReceiver.class);
 
     // register a handler for the action "log-event", and map it to ConsoleLoggingActionReceiver (see below)
     // ConsoleLoggingActionReceiver extends FactualActionReceiver, the BroadcastReceiver version of FactualActionHandler

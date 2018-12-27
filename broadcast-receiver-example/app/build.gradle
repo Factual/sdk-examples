@@ -42,13 +42,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Third party libraries used by the Engine SDK:
-    implementation 'com.android.volley:volley:1.1.0'
-    implementation('com.google.android.gms:play-services-location:11.0.4', {
-        exclude group: 'com.android.support', module: 'support-v4'
-    })
-    implementation 'org.apache.thrift:libthrift:0.9.3'
-    implementation 'com.google.android.gms:play-services-analytics:11.0.4'
+  implementation 'com.android.volley:volley:1.1.0'
+  implementation('com.google.android.gms:play-services-location:16.0.0', {
+    exclude group: 'com.android.support', module: 'support-v4'
+  })
+  implementation 'org.apache.thrift:libthrift:0.9.3'
+  implementation 'com.google.android.gms:play-services-analytics:16.0.4'
+
+  implementation "android.arch.lifecycle:extensions:1.1.1"
+  annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
     // The Engine AAR:
-    implementation(name: 'factual-engine-sdk-android', ext: 'aar')
+    implementation(name: 'factual-engine-8.6.0-release', ext: 'aar')
 }

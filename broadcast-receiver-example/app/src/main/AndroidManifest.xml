@@ -16,13 +16,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.factual.engine.FactualEngine"/>
+      <service
+        android:name="com.factual.engine.FactualJobIntentService"
+        android:permission="android.permission.BIND_JOB_SERVICE"
+        android:exported="false" />
         <receiver android:name=".ConsoleLoggingActionReceiver"/>
         <receiver android:name=".ConsoleLoggingFactualClientReceiver"/>
         <receiver android:name=".ConsoleLoggingUserJourneyReceiver"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
 </manifest>
