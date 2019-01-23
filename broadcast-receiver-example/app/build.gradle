@@ -53,5 +53,5 @@ dependencies {
   annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
     // The Engine AAR:
-    implementation(name: 'factual-engine-8.6.0-release', ext: 'aar')
+    implementation(name: 'factual-engine-sdk-android', ext: 'aar')
 }
