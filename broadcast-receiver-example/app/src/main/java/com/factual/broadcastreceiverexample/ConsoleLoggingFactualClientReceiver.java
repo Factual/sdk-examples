@@ -23,7 +23,11 @@ public class ConsoleLoggingFactualClientReceiver extends FactualClientReceiver {
     Log.i("engine", "Engine has started.");
     // Example of getting a list of candidates for my current location. (results will show up in
     // logging console, so this example won't be interesting outside of the device emulator).
-    FactualEngine.getPlaceCandidates(new ConsoleLoggingFactualPlacesListener());
+    try {
+      FactualEngine.getPlaceCandidates(new ConsoleLoggingFactualPlacesListener());
+    } catch (FactualException e) {
+      Log.e("engine", "A getPlaceCandidates error occurred: " + e);
+    }
   }
 
   @Override
